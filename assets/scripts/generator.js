@@ -1,98 +1,143 @@
 
 class Border {
-  constructor(outlines = [new SubBorder()], insets = []){
-    this._outlines = outlines;
+  constructor(insets = []){
     this._insets = insets;
-    this._borderRadius = 0;
+    this._topInsets = insets.filter(inset => inset.side === "top");
+    this._leftInsets = insets.filter(inset => inset.side === "left");
+    this._bottomInsets = insets.filter(inset => inset.side === "bottom");
+    this._rightInsets = insets.filter(inset => inset.side === "right");
   }
-  addOutline(blur, size = 5, color, units){
-    let len = this._outlines.length;
+  addInsetTop(size, blur, color){
+    let len = this._topInsets.length;
     if (len === 1){
-      size += this._outlines[0].size
+      size += this._topInsets[0].size
     } 
     if (len > 1){
-      size += this._outlines[len - 1].size;
+      size += this._topInsets[len - 1].size;
     }
-    this._outlines.push(new SubBorder(false, blur, size, color, units))
+    this._insets.push(new SubInset("top", size, blur, color));
+    this._topInsets.push(new SubInset("top", size, blur, color));
     return this;
   }
-  removeOutline(){
-    this._outlines.splice(-1, 1);
+  addInsetLeft(size, blur, color){
+    let len = this._leftInsets.length;
+    if (len === 1){
+      size += this._leftInsets[0].size
+    } 
+    if (len > 1){
+      size += this._leftInsets[len - 1].size;
+    }
+    this._insets.push(new SubInset("left", size, blur, color));
+    this._leftInsets.push(new SubInset("left", size, blur, color));
+    return this;
+  }
+  addInsetBottom(size, blur, color){
+    let len = this._bottomInsets.length;
+    if (len === 1){
+      size += this._bottomInsets[0].size
+    } 
+    if (len > 1){
+      size += this._bottomInsets[len - 1].size;
+    }
+    this._insets.push(new SubInset("bottom", size, blur, color));
+    this._bottomInsets.push(new SubInset("bottom", size, blur, color));
+    return this;
+  }
+  addInsetRight(size, blur, color){
+    let len = this._rightInsets.length;
+    if (len === 1){
+      size += this._rightInsets[0].size
+    } 
+    if (len > 1){
+      size += this._rightInsets[len - 1].size;
+    }
+    this._insets.push(new SubInset("right", size, blur, color));
+    this._rightInsets.push(new SubInset("right", size, blur, color));
+    return this;
+  }
+  addInset(side, size, blur, color){
+    switch (side){
+      case "top":
+      this.addInsetTop(size, blur, color);
+      break;
+      case "left":
+      this.addInsetLeft(size, blur, color);
+      break;
+      case "bottom":
+      this.addInsetBottom(size, blur, color);
+      break;
+      case "right":
+      this.addInsetRight(size, blur, color);
+      break;
+      default:
+      throw "error, arg needs to be 'top', 'left', 'bottom' or 'right'."
+    }
     return this;
   }
 
-  addInset(blur, size = 5, color, units){
-    let len = this._insets.length;
-    if (len === 1){
-      size += this._insets[0].size
-    } 
-    if (len > 1){
-      size += this._insets[len - 1].size;
-    }
-    this._insets.push(new SubBorder(true, blur, size, color, units))
-    return this;
-  }
+
   removeInset(){
-    this._insets.splice(-1, 1);
+    let removed = this._insets.splice(-1, 1)[0].side;
+    switch (removed) {
+      case "top":
+      this._topInsets.splice(-1, 1);
+      break;
+      case "left":
+      this._leftInsets.splice(-1, 1);
+      break;
+      case "bottom":
+      this._bottomInsets.splice(-1, 1);
+      break;
+      case "right":
+      this._rightInsets.splice(-1, 1);
+      break;
+      default:
+      throw "error, direction needs to be 'top', 'left', 'bottom' or 'right'."
+    }
     return this;
   }
   get innerCss(){
     let cssString = ""
-    for (let i = 0; i < this._outlines.length; i++){
-      if( i === 0 ){
-        cssString += `\n                   ${this._outlines[i].css}`
-      } else{
-        cssString +=`,\n                   ${this._outlines[i].css}`
-      }
-    }
     for (let i = 0; i < this._insets.length; i++){
-      cssString +=  `,\n                   ${this._insets[i].css}`
-    }
-    if(this._outlines.length === 0){
-      cssString = cssString.substring(1);
-      if(this._insets.length === 0){
-        cssString = "  none";
+      if( i === 0 ){
+        cssString += `                   ${this._insets[i].css}`
+      } else{
+        cssString +=`,\n                   ${this._insets[i].css}`
       }
+    }
+    if(this._insets.length === 0){
+      cssString = "  none";
     }
     return cssString;
   }
   get css(){
     let innerCssString = this.innerCss;
     let cssString = "";
-    cssString += `-webkit-box-shadow:${innerCssString}; \n`;
-    cssString += `   -moz-box-shadow:${innerCssString};\n`;
-    cssString += `        box-shadow:${innerCssString};`;
+    cssString += `-webkit-box-shadow:\n${innerCssString}; \n`;
+    cssString += `   -moz-box-shadow:\n${innerCssString};\n`;
+    cssString += `        box-shadow:\n${innerCssString};`;
     return cssString;
   }
-  get outlinesCount(){
-    return this._outlines.length
-  }
+
   get insetsCount(){
-    return this._insets.length
-  }
-  get borderRadiusInnerCss(){
-    return `${this._borderRadius}px`;
-  }
-  set borderRadius(val){
-    this._borderRadius = val;
+    return this._insets.length;
   }
   
 }
 
 
-class SubBorder {
-  constructor(inset = false, blur = 0, size = 5, color = "#000", units = "px"){
-    this._inset = inset;
-    this._blur = blur;
+class SubInset {
+  constructor(side, size, blur, color){
+    this._side = side;
     this._size = size;
     this._color = color;
-    this._units = units;
+    this._blur = blur
   }
-  set inset(val){
-    this._inset = val;
+  set side(val){
+    this._size = val;
   }
-  set blur(val){
-    this._blur = val;
+  get side(){
+    return this._side;
   }
   get size(){
     return this._size;
@@ -103,12 +148,50 @@ class SubBorder {
   set color(val){
     this._color = val;
   }
-  set units(val){
-    this._units = val;
+  get blurActual(){
+    return this._blur * 2;
+  }
+  get spreadActual(){
+    return - Math.floor(this.blurActual * 0.7);
+  }
+  get hl(){
+     switch ( this._side ){
+      case "left":
+        return `${this._size}`;
+        break;
+      case "right":
+        return `-${this._size}`;
+      default:
+        return 0;
+    }   
+  }
+  get vl(){
+    switch ( this._side ){
+      case "top":
+        return `${this._size}`;
+        break;
+      case "bottom":
+        return `-${this._size}`;
+      default:
+        return 0;
+    }
   }
   get css(){
-    return `${this._inset ? "inset ": ""}0 0 ${this._blur}${this._blur?this._units:""} ${this._size}${this._size?this._units:""} ${this._color}`;
+    return `inset ${this.hl}${this.hl === 0 ? "" : "px"} ${this.vl}${this.vl === 0 ? "" : "px"} ${this.blurActual}${this.blurActual === 0 ? "" : "px"} ${this.spreadActual}${this.spreadActual === 0 ? "" : "px"} ${this._color}`
   }
 }
+/*
+var a = new SubInset("bottom", 20, 10, "green");
+var b = new Border()
+b.addInset("left", 20, 20 , "blue")
+b.addInset("top", 20, 20 , "blue")
+b.addInset("top", 20, 20 , "blue")
+b.addInset("bottom", 20, 20 , "blue")
+b.addInset("right", 20, 20 , "blue")
+b.removeInset();
+console.log(b.innerCss)*/
+
+
+
 
 

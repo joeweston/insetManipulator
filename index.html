@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 
-  <title>Border Generator</title>
+  <title>Inset Manipulator</title>
 
   <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
 
@@ -18,114 +18,27 @@
   <h1>Multiple Border Generator (using box shadow)</h1>
   <div id="main-container">
     <div id="main-form">
-      <div id="outline-container">
-        <h2>Outlines</h2>
-        <button type="button" id="add-outline">Add Outline</button>
-        <button type="button" id="remove-outline">Remove Outline</button>
-        <div id="outline-1" class="wiget">
-          <h3>Outline 1</h3>
-          <div class="slide-container">
-            Blur:  <span class="slide-value">0</span>px
-            <input type="range" min="0" max="100" class="slider" name="blur" value="0">
-          </div>
-          <div class="slide-container">
-            (visual) Size:  <span class="slide-value">1</span>px
-            <input type="range" min="0" max="100" class="slider" name="size" value="1">
-          </div>
-          <div class="color-container">
-          Color:
-            <input type="color" name="color" value = "#000000"> <span class="color-value">#000000</span>
-          </div>
-        </div>
-        <div id="outline-2" class="hidden wiget">
-          <h3>Outline 2</h3>
-          <div class="slide-container">
-            Blur:  <span class="slide-value">0</span>px
-            <input type="range" min="0" max="100" class="slider" name="blur" value="0">
-          </div>
-          <div class="slide-container">
-            (visual) Size:  <span class="slide-value">1</span>px
-            <input type="range" min="0" max="100" class="slider" name="size" value="1">
-          </div>
-          <div class="color-container">
-          Color:
-            <input type="color" name="color" value = "#444444"> <span class="color-value">#444444</span>
-          </div>
-        </div>
-        <div id="outline-3" class="hidden wiget">
-          <h3>Outline 3</h3>
-          <div class="slide-container">
-            Blur:  <span class="slide-value">0</span>px
-            <input type="range" min="0" max="100" class="slider" name="blur" value="0">
-          </div>
-          <div class="slide-container">
-            (visual) Size:  <span class="slide-value">1</span>px
-            <input type="range" min="0" max="100" class="slider" name="size" value="1">
-          </div>
-          <div class="color-container">
-          Color:
-            <input type="color" name="color" value = "#888888"> <span class="color-value">#888888</span>
-          </div>
-        </div>
-        <div id="outline-4" class="hidden wiget">
-          <h3>Outline 4</h3>
-          <div class="slide-container">
-            Blur:  <span class="slide-value">0</span>px
-            <input type="range" min="0" max="100" class="slider" name="blur" value="0">
-          </div>
-          <div class="slide-container">
-            (visual) Size:  <span class="slide-value">1</span>px
-            <input type="range" min="0" max="100" class="slider" name="size" value="1">
-          </div>
-          <div class="color-container">
-          Color:
-            <input type="color" name="color" value = "#bbbbbb"> <span class="color-value">#bbbbbb</span>
-          </div>
-        </div>
-        <div id="outline-5" class="hidden wiget">
-          <h3>Outline 5</h3>
-          <div class="slide-container">
-            Blur:  <span class="slide-value">0</span>px
-            <input type="range" min="0" max="100" class="slider" name="blur" value="0">
-          </div>
-          <div class="slide-container">
-            (visual) Size:  <span class="slide-value">1</span>px
-            <input type="range" min="0" max="100" class="slider" name="size" value="1">
-          </div>
-          <div class="color-container">
-          Color:
-            <input type="color" name="color" value = "#bbbbbb"> <span class="color-value">#bbbbbb</span>
-          </div>
-        </div>
-        <div id="outline-6" class="hidden wiget">
-          <h3>Outline 6</h3>
-          <div class="slide-container">
-            Blur:  <span class="slide-value">0</span>px
-            <input type="range" min="0" max="100" class="slider" name="blur" value="0">
-          </div>
-          <div class="slide-container">
-            (visual) Size:  <span class="slide-value">1</span>px
-            <input type="range" min="0" max="100" class="slider" name="size" value="1">
-          </div>
-          <div class="color-container">
-          Color:
-            <input type="color" name="color" value = "#bbbbbb"> <span class="color-value">#bbbbbb</span>
-          </div>
-        </div>
-      </div>
+      <div>
       <div id="inset-container">
         <h2>Insets</h2>
-        <button type="button" id="add-inset">Add Inset</button>
-        <button type="button" id="remove-inset">Remove Inset</button>
-        <div id="inset-1" class="hidden wiget">
+        <button type="button" class="add-inset">Add Inset</button>
+        <button type="button" class="remove-inset">Remove Inset</button>
+        <div id="inset-1" class="wiget">
           <h3>Inset 1</h3>
+          <div id="radio-container">
+            Side: 
+            <input type="radio" name="side-1" value="top" checked>top
+            <input type="radio" name="side-1" value="left">left
+            <input type="radio" name="side-1" value="bottom">bottom
+            <input type="radio" name="side-1" value="right">right
+          </div>
           <div class="slide-container">
-            Blur:  <span class="slide-value">0</span>px
+            Fadeout (similar to blur):  <span class="slide-value">0</span>px
             <input type="range" min="0" max="100" class="slider" name="blur" value="0">
           </div>
           <div class="slide-container">
             (visual) Size:  <span class="slide-value">1</span>px
-            <input type="range" min="0" max="100" class="slider" name="size" value="1">
+            <input type="range" min="0" max="400" class="slider" name="size" value="1">
           </div>
           <div class="color-container">
           Color:
@@ -134,13 +47,20 @@
         </div>
         <div id="inset-2" class="hidden wiget">
           <h3>Inset 2</h3>
+          <div id="radio-container">
+          Side: 
+            <input type="radio" name="side-2" value="top" checked>top
+            <input type="radio" name="side-2" value="left">left
+            <input type="radio" name="side-2" value="bottom">bottom
+            <input type="radio" name="side-2" value="right">right
+          </div>
           <div class="slide-container">
-            Blur:  <span class="slide-value">0</span>px
+            Fadeout (similar to blur):  <span class="slide-value">0</span>px
             <input type="range" min="0" max="100" class="slider" name="blur" value="0">
           </div>
           <div class="slide-container">
             (visual) Size:  <span class="slide-value">1</span>px
-            <input type="range" min="0" max="100" class="slider" name="size" value="1">
+            <input type="range" min="0" max="400" class="slider" name="size" value="1">
           </div>
           <div class="color-container">
           Color:
@@ -149,13 +69,20 @@
         </div>
         <div id="inset-3" class="hidden wiget">
           <h3>Inset 3</h3>
+          <div id="radio-container">
+          Side: 
+            <input type="radio" name="side-3" value="top" checked>top
+            <input type="radio" name="side-3" value="left">left
+            <input type="radio" name="side-3" value="bottom">bottom
+            <input type="radio" name="side-3" value="right">right
+          </div>
           <div class="slide-container">
-            Blur:  <span class="slide-value">0</span>px
+            Fadeout (similar to blur):  <span class="slide-value">0</span>px
             <input type="range" min="0" max="100" class="slider" name="blur" value="0">
           </div>
           <div class="slide-container">
             (visual) Size:  <span class="slide-value">1</span>px
-            <input type="range" min="0" max="100" class="slider" name="size" value="1">
+            <input type="range" min="0" max="400" class="slider" name="size" value="1">
           </div>
           <div class="color-container">
           Color:
@@ -164,13 +91,20 @@
         </div>
         <div id="inset-4" class="hidden wiget">
           <h3>Inset 4</h3>
+          <div id="radio-container">
+          Side: 
+            <input type="radio" name="side-4" value="top" checked>top
+            <input type="radio" name="side-4" value="left">left
+            <input type="radio" name="side-4" value="bottom">bottom
+            <input type="radio" name="side-4" value="right">right
+          </div>
           <div class="slide-container">
-            Blur:  <span class="slide-value">0</span>px
+            Fadeout (similar to blur):  <span class="slide-value">0</span>px
             <input type="range" min="0" max="100" class="slider" name="blur" value="0">
           </div>
           <div class="slide-container">
             (visual) Size:  <span class="slide-value">1</span>px
-            <input type="range" min="0" max="100" class="slider" name="size" value="1">
+            <input type="range" min="0" max="400" class="slider" name="size" value="1">
           </div>
           <div class="color-container">
           Color:
@@ -179,13 +113,20 @@
         </div>
         <div id="inset-5" class="hidden wiget">
           <h3>Inset 5</h3>
+          <div id="radio-container">
+          Side: 
+            <input type="radio" name="side-5" value="top" checked>top
+            <input type="radio" name="side-5" value="left">left
+            <input type="radio" name="side-5" value="bottom">bottom
+            <input type="radio" name="side-5" value="right">right
+          </div>
           <div class="slide-container">
-            Blur:  <span class="slide-value">0</span>px
+            Fadeout (similar to blur):  <span class="slide-value">0</span>px
             <input type="range" min="0" max="100" class="slider" name="blur" value="0">
           </div>
           <div class="slide-container">
             (visual) Size:  <span class="slide-value">1</span>px
-            <input type="range" min="0" max="100" class="slider" name="size" value="1">
+            <input type="range" min="0" max="400" class="slider" name="size" value="1">
           </div>
           <div class="color-container">
           Color:
@@ -194,24 +135,37 @@
         </div>
         <div id="inset-6" class="hidden wiget">
           <h3>Inset 6</h3>
+          <div id="radio-container">
+          Side: 
+            <input type="radio" name="side-6" value="top" checked>top
+            <input type="radio" name="side-6" value="left">left
+            <input type="radio" name="side-6" value="bottom">bottom
+            <input type="radio" name="side-6" value="right">right
+          </div>
           <div class="slide-container">
-            Blur:  <span class="slide-value">0</span>px
+            Fadeout (similar to blur):  <span class="slide-value">0</span>px
             <input type="range" min="0" max="100" class="slider" name="blur" value="0">
           </div>
           <div class="slide-container">
             (visual) Size:  <span class="slide-value">1</span>px
-            <input type="range" min="0" max="100" class="slider" name="size" value="1">
+            <input type="range" min="0" max="400" class="slider" name="size" value="1">
           </div>
           <div class="color-container">
           Color:
-            <input type="color" name="color" value = "#dddddd"> <span class="color-value">#dddddd</span>
+            <input type="color" name="color" value = "#eeeeee"> <span class="color-value">#eeeeee</span>
           </div>
         </div>
       </div>
+      <button type="button" class="add-inset end-button">Add Inset</button>
+      <button type="button" class="remove-inset end-button">Remove Inset</button>
+      </div>
+
+
+
       <div id="extra-controls">
         <h2>Extra Controls</h2>
         <div class="wiget">
-          <div class="slide-container">
+          <div id="border-radius-slide-container">
             Border Radius:  <span class="slide-value">0</span>px
             <input type="range" min="0" max="100" class="slider" name="border-radius" value="0">
           </div>
